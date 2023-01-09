@@ -12,6 +12,7 @@ const ORIGIN = 'origin';
 const _defaultHeadersList = [
   'accept',
   'accept-encoding',
+  'accept-language',
   'authorization',
   'content-type',
   'dnt',
@@ -25,7 +26,7 @@ const _defaultMethodsList = [
   'OPTIONS',
   'PATCH',
   'POST',
-  'PUT'
+  'PUT',
 ];
 
 Map<String, String> _defaultHeaders = {
@@ -36,15 +37,13 @@ Map<String, String> _defaultHeaders = {
   ACCESS_CONTROL_MAX_AGE: '86400',
 };
 
-final _defaultHeadersAll =
-    _defaultHeaders.map((key, value) => MapEntry(key, [value]));
+final _defaultHeadersAll = _defaultHeaders.map((key, value) => MapEntry(key, [value]));
 
 typedef OriginChecker = bool Function(String origin);
 
 bool originAllowAll(String origin) => true;
 
-OriginChecker originOneOf(List<String> origins) =>
-    (origin) => origins.contains(origin);
+OriginChecker originOneOf(List<String> origins) => (origin) => origins.contains(origin);
 
 Middleware corsHeaders({
   Map<String, String>? headers,
